@@ -541,6 +541,8 @@ class PostForm(FlaskForm):
     )
     submit = SubmitField("Post Reply")
 
+with app.app_context():
+    db.create_all()
 
 # ---------------------
 # AUTH + PROFILE ROUTES
@@ -1732,6 +1734,4 @@ def mentor_chat(req_id):
     )
 
 if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
     app.run(debug=True)
