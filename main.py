@@ -938,6 +938,8 @@ def view_user(user_id):
     student_projects = []
     student_threads = []
 
+    accepted_mentorship = None
+
     if user.role == 'student':
         # use the viewed user's id, not current_user
         owned_projects = Project.query.filter_by(owner_id=user.id)
@@ -954,7 +956,6 @@ def view_user(user_id):
                                       .order_by(Thread.created_at.desc()) \
                                       .limit(5).all()
     
-        accepted_mentorship = None
 
     # current user is student, viewing a mentor
     if current_user.role == 'student' and user.role == 'mentor':
