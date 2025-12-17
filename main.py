@@ -562,6 +562,10 @@ def login():
         if user:
             if bcrypt.check_password_hash(user.password, form.password.data):
                 login_user(user)
+                if user.role == 'student' and not user.student_profile:
+                    return redirect(url_for('edit_student_profile'))
+                if user.role == 'mentor' and not user.mentor_profile:
+                    return redirect(url_for('edit_mentor_profile'))
                 return redirect(url_for('dashboard'))
             else:
                 error_message = "Invalid password. Please try again."
@@ -764,6 +768,9 @@ def get_mentorship_type_label(code):
 def dashboard():
     if current_user.role == 'student':
         student_profile = current_user.student_profile
+        if not student_profile:
+            flash("Please complete your profile first.", "warning")
+            return redirect(url_for('edit_student_profile'))
         programme_full = get_programme_full_name(student_profile.programme)
         specialization_full = None
         if student_profile.specialization:
@@ -838,6 +845,11 @@ def dashboard():
     
     elif current_user.role == 'mentor':
         mentor_profile = current_user.mentor_profile
+
+        if not mentor_profile:
+            flash("Please complete your profile first.", "warning")
+            return redirect(url_for('edit_mentor_profile'))
+        
         position = mentor_profile.position if mentor_profile else None
 
         incoming_requests = (MentorshipRequest.query
