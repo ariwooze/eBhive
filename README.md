@@ -98,5 +98,5 @@ A mentorship & collaboration platform for MMU students and mentors, designed to 
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/<your-username>/web-app-building-competition-2025.git
-cd web-app-building-competition-2025
+git clone https://github.com/<your-username>/eBhive.git
+cd eBhive
