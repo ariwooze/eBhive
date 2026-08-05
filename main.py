@@ -20,7 +20,7 @@ if db_url.startswith("postgres://"):
 
 app.config["SQLALCHEMY_DATABASE_URI"] = db_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = 'TripleABattery'
+app.config["SECRET_KEY"] = os.environ["SECRET_KEY"]
 app.config['UPLOAD_FOLDER'] = 'static/uploads/pfp'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 app.config['MENTORSHIP_DOCUMENTS'] = os.path.join('static', 'uploads', 'mentorship_docs')
@@ -1752,4 +1752,4 @@ def mentor_chat(req_id):
     )
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=os.getenv("FLASK_DEBUG") == "1")
