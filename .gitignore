@@ -1,2 +1,4 @@
 instance/database.db
-instance/database.db
+.env
+*.db
+__pycache__/
