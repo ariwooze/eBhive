@@ -10,6 +10,9 @@ from flask_bcrypt import Bcrypt
 from datetime import datetime
 from werkzeug.utils import secure_filename
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 
